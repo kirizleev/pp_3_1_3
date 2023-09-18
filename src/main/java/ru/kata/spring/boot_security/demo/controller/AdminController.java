@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.service.UserServiceImp;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 	private UserService userService;
@@ -21,7 +22,7 @@ public class AdminController {
 		this.userService = userService;
 	}
 
-	@GetMapping(value = "/admin")
+	@GetMapping
 	public String printUsers(ModelMap model) {
 
 		List<User> users = userService.listUsers();
@@ -30,38 +31,32 @@ public class AdminController {
 		return "admin";
 	}
 
-	@GetMapping("/admin/edit_{id}")
+	@GetMapping("/edit_{id}")
 	public String editUser(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("user", userService.getById(id));
 		return "edit";
 	}
 
-	@PostMapping()
-	public String create(@ModelAttribute("person") User user) {
+	@PostMapping("/new")
+	public String create(@ModelAttribute("user") User user) {
 		userService.add(user);
 		return "redirect:/admin";
 	}
 
-	@PatchMapping("/admin/edit_{id}")
+	@PatchMapping("/edit_{id}")
 	public String updateUser(@ModelAttribute("user") User user) {
 		userService.edit(user);
 		return "redirect:/admin";
 	}
 
-	@DeleteMapping("/admin/delete_{id}")
+	@DeleteMapping("/delete_{id}")
 	public String deleteUser(@ModelAttribute("user") User user) {
 		userService.delete(user);
 		return "redirect:/admin";
 	}
 
-	@GetMapping("/admin/new")
+	@GetMapping("/new")
 	public String newUser(@ModelAttribute("user") User user) {
 		return "new";
-	}
-
-	@GetMapping()
-	public String createUser(@ModelAttribute("user") User user) {
-		userService.add(user);
-		return "redirect:/admin";
 	}
 }

@@ -1,7 +1,5 @@
 package ru.kata.spring.boot_security.demo.dao;
 
-import org.hibernate.Session;
-import org.hibernate.internal.SessionImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
