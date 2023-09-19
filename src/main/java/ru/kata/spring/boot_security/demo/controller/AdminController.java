@@ -38,18 +38,18 @@ public class AdminController {
 	}
 
 	@PostMapping("/new")
-	public String create(@ModelAttribute("user") User user) {
+	public String createUser(@ModelAttribute("user") User user) {
 		userService.add(user);
 		return "redirect:/admin";
 	}
 
-	@PatchMapping("/edit_{id}")
+	@PostMapping("/edit")
 	public String updateUser(@ModelAttribute("user") User user) {
 		userService.edit(user);
 		return "redirect:/admin";
 	}
 
-	@DeleteMapping("/delete_{id}")
+	@PostMapping("/delete")
 	public String deleteUser(@ModelAttribute("user") User user) {
 		userService.delete(user);
 		return "redirect:/admin";
